@@ -22,9 +22,17 @@ document.querySelector('.container').innerHTML = product;
 
 const st_card = document.querySelector('.st_card')
 
+
+function getRandomColor() {
+  const hue = Math.floor(Math.random() * 360);
+  return `hsl(${hue}, 70%, 80%)`;
+}
+
 function Add_card () {
+
+  const randomColor = getRandomColor();
   st_card.innerHTML += `
-    <div class = "box">
+    <div class = "box" style="background-color:${randomColor};">
     <button onClick ="del_box(this)" >Delete</button>
     </div>
   `
