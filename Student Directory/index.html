@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body> 
+  <h1>Student Data</h1>
+  <div class="inptArea">
+    <input id="std-ID"  type="number" placeholder="Enter your id">
+    <input id="std-name" type="text" placeholder="Enter your name...">
+    <input id="std-marks" type="number" placeholder="Enter your marks">
+    <button class="Add_Student">Add Student</button>
+  </div>
+
+  <div class="search_area">
+    <input class="std-name-in" type="text" placeholder="Enter your name...">
+    <button class="sech">Search</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Marks</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody class="student-body">
+
+    </tbody>
+
+  </table>
+
+  <script src="data.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
