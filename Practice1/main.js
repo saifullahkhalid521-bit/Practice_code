@@ -1,5 +1,8 @@
+let countJoke = 0;
 document.getElementById('btn1').addEventListener('click', () => {
-  document.getElementById("jock").innerHTML = "getting your jock..."
+  countJoke += 1;
+  document.getElementById("jokeCount").innerHTML = `Jokes fetched: ${countJoke}`
+  document.getElementById("joke").innerHTML = "getting your jock..."
   setTimeout(()=>{
     fetch("https://v2.jokeapi.dev/joke/Programming?type=single")
   .then(response => {
@@ -9,13 +12,11 @@ document.getElementById('btn1').addEventListener('click', () => {
     return response.json()
   })
   .then(data => {
-    document.getElementById("jock").innerHTML = data.joke;
+    document.getElementById("joke").innerHTML = data.joke;
   })
   .catch(err => {
     console.log(err)
-     document.getElementById("jock").innerHTML ='Failed to get joke 😕';
+     document.getElementById("joke").innerHTML ='Failed to get joke 😕';
   });
   },1000);
 });
-
-
