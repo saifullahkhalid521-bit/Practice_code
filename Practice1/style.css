@@ -24,6 +24,11 @@ body{
   padding: 20px;
 
 }
-#jock {
+#joke {
+  font-size: 1.2rem;
+}
+
+/* Count Joke styling */
+#jokeCount {
   font-size: 1.2rem;
 }
