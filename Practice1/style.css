@@ -1,6 +1,11 @@
 body{
   color: white;
   background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 #btn1 {
@@ -13,8 +18,15 @@ body{
   margin: 20px;
   cursor: pointer;
 }
+
+#btn1:disabled {
+  background-color: rgb(20 ,20 , 20);
+  color: rgb(100 ,100 ,100);
+  cursor: not-allowed;
+}
+
 #getJokeBox {
-  margin-left: 100px;
+  /* margin-left: 100px; */
   width: 80vw;
   height: 30vh;
   display: flex;

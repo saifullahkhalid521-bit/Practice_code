@@ -1,31 +1,41 @@
 let countJoke = 0;
+// let show = false;
+const button1 = document.getElementById('btn1');
+const joke = document.getElementById("joke");
+const jokeCount = document.getElementById("jokeCount");
 
-document.getElementById('btn1').addEventListener('click', () => {
+jokeCount.innerHTML = `Jokes fetched: ${countJoke}`;
 
-  document.getElementById("joke").innerHTML = "getting your jock..."
+button1.addEventListener('click', () => {
+    button1.disabled = true;
+
+  joke.innerHTML = "getting your jock..."
 
   setTimeout(()=>{
+
     fetch("https://v2.jokeapi.dev/joke/Programming?type=single")
   .then(response => {
      if(!response.ok){
       throw new Error("HTTP error!");
     }
-    //Joke count logic
-    countJoke += 1;
-    document.getElementById("jokeCount").innerHTML = `Jokes fetched: ${countJoke}`
+    
 
     return response.json()
   })
   .then(data => {
-    document.getElementById("joke").innerHTML = data.joke;
+    joke.innerHTML = data.joke;
+
+    //Joke count logic
+    countJoke += 1;
+    jokeCount.innerHTML = `Jokes fetched: ${countJoke}`
   })
   .catch(err => {
     console.log(err)
-    countJoke = countJoke;
-      document.getElementById("jokeCount").innerHTML = `Jokes fetched: ${countJoke}`
-
-     document.getElementById("joke").innerHTML =`Failed to get joke 😕
+     joke.innerHTML =`Failed to get joke 😕
      try again leater.`;
+  })
+  .finally(()=>{
+    button1.disabled = false;
   });
   },1000);
 });
