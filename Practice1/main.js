@@ -3,6 +3,8 @@ let countJoke = 0;
 const button1 = document.getElementById('btn1');
 const joke = document.getElementById("joke");
 const jokeCount = document.getElementById("jokeCount");
+const favList = document.getElementById("favList");
+
 
 jokeCount.innerHTML = `Jokes fetched: ${countJoke}`;
 
@@ -23,11 +25,15 @@ button1.addEventListener('click', () => {
     return response.json()
   })
   .then(data => {
-    joke.innerHTML = data.joke;
+    
+    joke.innerHTML = `<div id = "mainJoke" >${data.joke}</div>
+                      <button id = "fav" >Add to Fav</button>`
 
     //Joke count logic
     countJoke += 1;
     jokeCount.innerHTML = `Jokes fetched: ${countJoke}`
+
+
   })
   .catch(err => {
     console.log(err)
@@ -39,3 +45,16 @@ button1.addEventListener('click', () => {
   });
   },1000);
 });
+
+
+let val = true;
+joke.addEventListener('click', (event) => {
+  const favBtn = document.getElementById("fav");
+  if (event.target.id === 'fav' && val === true) {
+    favBtn.innerHTML = "Added";
+    val = false;
+    const mainJokeElem = document.getElementById("mainJoke");
+    favList.innerHTML+= `<li>${mainJokeElem.innerHTML}</li>`;
+  }
+})
+

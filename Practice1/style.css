@@ -37,10 +37,29 @@ body{
 
 }
 #joke {
-  font-size: 1.2rem;
+  background-color: rgb(100 ,100 ,100); ;
+  width: 60vw;
+  height: 60vh;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#mainJoke{
+  color: white;
 }
 
 /* Count Joke styling */
 #jokeCount {
   font-size: 1.2rem;
+}
+
+#favList {
+  background-color: rgb(54, 49, 42);
+  width: 40vw;
+  height: 40vh;
+}
+
+#fav {
+  padding: 10px;
+  background-color: aquamarine;
 }
