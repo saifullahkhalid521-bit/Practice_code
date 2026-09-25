@@ -1,4 +1,5 @@
 let countJoke = 0;
+let val = true;
 // let show = false;
 const button1 = document.getElementById('btn1');
 const joke = document.getElementById("joke");
@@ -9,7 +10,8 @@ const favList = document.getElementById("favList");
 jokeCount.innerHTML = `Jokes fetched: ${countJoke}`;
 
 button1.addEventListener('click', () => {
-    button1.disabled = true;
+  button1.disabled = true;
+  val = true;
 
   joke.innerHTML = "getting your jock..."
 
@@ -47,7 +49,7 @@ button1.addEventListener('click', () => {
 });
 
 
-let val = true;
+
 joke.addEventListener('click', (event) => {
   const favBtn = document.getElementById("fav");
   if (event.target.id === 'fav' && val === true) {

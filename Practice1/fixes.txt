@@ -1,1 +1,3 @@
 1. Joke fetched count logick fix.
+
+2. Multiple Fav jokes add to fav jokes liks fix. 
