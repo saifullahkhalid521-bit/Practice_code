@@ -1,70 +1,248 @@
-body{
-  color: white;
-  background-color: black;
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base Reset & Custom Color Variables */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Your Custom Color Palette */
+  --primary-berry: #E11A45;
+  --primary-berry-hover: #c41239;
+  --soft-rose: #E3AFC9;
+  --cream-white: #EFECD7;
+  --amber-gold: #EDC92C;
+
+  /* UI Dark Theme Foundations */
+  --bg-primary: #0d0f12;
+  --card-bg: #181c22;
+  --card-border: #2a303c;
+  --text-muted: #9aa3b2;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--cream-white);
+  font-family: 'Inter', sans-serif;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  font-family: 'Courier New', Courier, monospace;
+  align-items: center;
+  padding: 2rem 1rem;
+  gap: 2rem;
 }
 
-li{
-  list-style: none;
+/* Header */
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cream-white);
+  text-align: center;
 }
 
+/* Main Joke Box */
+#getJokeBox {
+  width: 100%;
+  max-width: 650px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Counter Badge */
+#jokeCount {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--soft-rose);
+  background: rgba(227, 175, 201, 0.08);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(227, 175, 201, 0.2);
+}
+
+/* Primary Get Joke Button (#E11A45) */
 #btn1 {
-  border-radius: 10px;
+  width: 100%;
+  max-width: 280px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--primary-berry);
   border: none;
-  background-color: rgb(50, 50, 50);
-  color: white;
-  font-size: 1.2rem;
-  padding: 10px;
-  margin: 20px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(225, 26, 69, 0.3);
+}
+
+#btn1:hover {
+  background-color: var(--primary-berry-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 26, 69, 0.45);
+}
+
+#btn1:active {
+  transform: translateY(0);
 }
 
 #btn1:disabled {
-  background-color: rgb(20 ,20 , 20);
-  color: rgb(100 ,100 ,100);
+  background-color: var(--card-border);
+  color: var(--text-muted);
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-#getJokeBox {
-  /* margin-left: 100px; */
-  width: 80vw;
-  /* height: 30vh; */
-  display: flex;
-  flex-direction: column ;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-
-}
+/* Joke Display Box */
 #joke {
-  background-color: rgb(100 ,100 ,100); ;
-  width: 60vw;
-  /* height: 60vh; */
+  width: 100%;
+  margin-top: 1.5rem;
+  min-height: 120px;
+  background-color: rgba(13, 15, 18, 0.6);
+  border: 1px dashed var(--card-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+#mainJoke {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--cream-white);
+  width: 100%;
+}
+
+/* Add to Fav Button (#EDC92C) */
+#fav {
+  align-self: flex-end;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0d0f12;
+  background-color: var(--amber-gold);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(237, 201, 44, 0.25);
+}
+
+#fav:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: scale(1.04);
+}
+
+#fav:disabled {
+  background-color: transparent;
+  color: var(--amber-gold);
+  border: 1px solid var(--amber-gold);
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Favorites List Container */
+#favList {
+  width: 100%;
+  max-width: 650px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+}
+
+#favList p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Favorites Items */
+#favList ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+#favList li {
+  background-color: rgba(13, 15, 18, 0.7);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
   padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+#favList li p {
+  color: var(--cream-white);
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* Remove Button (#E11A45 Outline) */
+.unFav {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-berry);
+  background: rgba(225, 26, 69, 0.1);
+  border: 1px solid rgba(225, 26, 69, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.unFav:hover {
+  background-color: var(--primary-berry);
+  color: #ffffff;
+}
+
+/* Scrollbar Styling */
+#favList ul::-webkit-scrollbar {
+  width: 6px;
+}
+
+#favList ul::-webkit-scrollbar-thumb {
+  background: var(--card-border);
   border-radius: 10px;
 }
 
-#mainJoke{
-  color: white;
-}
+/* Responsive Breakpoints */
+@media (max-width: 480px) {
+  #getJokeBox, #favList {
+    padding: 1.25rem;
+  }
 
-/* Count Joke styling */
-#jokeCount {
-  font-size: 1.2rem;
-}
+  #favList li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-#favList {
-  background-color: rgb(54, 49, 42);
-  width: 80vw;
-  padding: 10px;
-  /* height: 40vh; */
-}
-
-#fav {
-  padding: 10px;
-  background-color: aquamarine;
+  .unFav {
+    align-self: flex-end;
+  }
 }
