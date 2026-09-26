@@ -1,16 +1,22 @@
 let countJoke = 0;
-let currentJokeText = ""; // Abhi screen par jo joke dikh raha hai usko track karne ke liye
-let favorites = []; // Sabhi favorite jokes ka array
+let currentJokeText = "";
+let favorites = JSON.parse(localStorage.getItem('favJokes')) || []; 
 
+// DOM Elements
 const button1 = document.getElementById('btn1');
 const joke = document.getElementById("joke");
 const jokeCount = document.getElementById("jokeCount");
 const favList = document.getElementById("favList");
 
-jokeCount.innerHTML = `Jokes fetched: ${countJoke}`;
+// Initial render
+if (jokeCount) jokeCount.innerHTML = `Jokes fetched: ${countJoke}`;
+renderFavorites();
 
-// 1. Joke Fetch Logic
-button1.addEventListener('click', () => {
+function saveToLocalStorage() {
+  localStorage.setItem('favJokes', JSON.stringify(favorites));
+}
+
+button1?.addEventListener('click', () => {
   button1.disabled = true;
   joke.innerHTML = "getting your joke...";
 
@@ -21,9 +27,7 @@ button1.addEventListener('click', () => {
         return response.json();
       })
       .then(data => {
-        currentJokeText = data.joke; // Current joke text variable mein save kiya
-
-        // Check ki kya ye joke pehle se favorites mein hai
+        currentJokeText = data.joke;
         const isAlreadyFav = favorites.includes(currentJokeText);
 
         joke.innerHTML = `
@@ -36,7 +40,7 @@ button1.addEventListener('click', () => {
         jokeCount.innerHTML = `Jokes fetched: ${countJoke}`;
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         joke.innerHTML = `Failed to get joke 😕 try again later.`;
       })
       .finally(() => {
@@ -45,33 +49,31 @@ button1.addEventListener('click', () => {
   }, 1000);
 });
 
-// 2. Add to Favorite Logic (Array Update + Re-render)
-joke.addEventListener('click', (event) => {
+// Event delegation for Add to Fav
+joke?.addEventListener('click', (event) => {
   if (event.target.id === 'fav') {
-    // Duplicate check using Array method
     if (!favorites.includes(currentJokeText)) {
-      favorites.push(currentJokeText); // Array me add kiya
+      favorites.push(currentJokeText);
       
       event.target.innerHTML = "Added";
       event.target.disabled = true;
 
-      renderFavorites(); // UI update karne ke liye function call
+      saveToLocalStorage();
+      renderFavorites(); 
     }
   }
 });
 
-// 3. Remove Favorite Logic (Array Filter + Re-render)
-favList.addEventListener('click', (event) => {
+// Event delegation for Remove Fav
+favList?.addEventListener('click', (event) => {
   if (event.target.classList.contains('unFav')) {
-    // Button ke data-index attribute se array ka index nikala
     const indexToRemove = Number(event.target.dataset.index);
 
-    // Array se specific element remove kiya
     favorites.splice(indexToRemove, 1);
 
-    renderFavorites(); // Dynamic Re-render
+    saveToLocalStorage();
+    renderFavorites(); 
 
-    // Agar main display par wohi joke abhi khula hai jise remove kiya, to button reset kar do
     const favBtn = document.getElementById("fav");
     if (favBtn && currentJokeText && !favorites.includes(currentJokeText)) {
       favBtn.innerHTML = "Add to Fav";
@@ -80,8 +82,9 @@ favList.addEventListener('click', (event) => {
   }
 });
 
-// 4. UI Helper Function: Array se HTML generate karta hai
 function renderFavorites() {
+  if (!favList) return;
+
   if (favorites.length === 0) {
     favList.innerHTML = `<p style="padding: 10px; color: #aaa;">No favorites added yet.</p>`;
     return;
